@@ -1,54 +1,34 @@
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const IsomorphicPlugin = require('webpack-isomorphic-tools/plugin');
+const isomorphicToolsConfig = require('./isomorphicToolsConfig');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const mqpacker = require('css-mqpacker');
+const precss = require('precss');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
+const webpackIsomorphicToolsPlugin = new IsomorphicPlugin(
+    isomorphicToolsConfig
+  )
 
-// Webpack uses `publicPath` to determine where the app is being served from.
-// In development, we always serve from the root. This makes config easier.
+ 
 const publicPath = '/';
-// `publicUrl` is just like `publicPath`, but we will provide it to our app
-// as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
-// Omit trailing slash as %PUBLIC_PATH%/xyz looks better than %PUBLIC_PATH%xyz.
 const publicUrl = '';
-// Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
 
-// This is the development configuration.
-// It is focused on developer experience and fast rebuilds.
-// The production configuration is different and lives in a separate file.
 module.exports = {
-    // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
-    // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
     devtool: 'cheap-module-source-map',
-    // These are the "entry points" to our application.
-    // This means they will be the "root" imports that are included in JS bundle.
-    // The first two entry points enable "hot" CSS and auto-refreshes for JS.
     entry: [
-        // We ship a few polyfills by default:
         require.resolve('./polyfills'),
-        // Include an alternative client for WebpackDevServer. A client's job is to
-        // connect to WebpackDevServer by a socket and get notified about changes.
-        // When you save a file, the client will either apply hot updates (in case
-        // of CSS changes), or refresh the page (in case of JS changes). When you
-        // make a syntax error, this client will display a syntax error overlay.
-        // Note: instead of the default WebpackDevServer client, we use a custom one
-        // to bring better experience for Create React App users. You can replace
-        // the line below with these two lines if you prefer the stock client:
-        // require.resolve('webpack-dev-server/client') + '?/',
-        // require.resolve('webpack/hot/dev-server'),
         require.resolve('react-dev-utils/webpackHotDevClient'),
-        // Finally, this is your app's code:
         paths.appIndexJs,
-        // We include the app code last so that if there is a runtime error during
-        // initialization, it doesn't blow up the WebpackDevServer client, and
-        // changing JS code would still trigger a refresh.
     ],
     output: {
         // Add /* filename */ comments to generated require()s in the output.
@@ -153,70 +133,66 @@ module.exports = {
                     // In production, we use a plugin to extract that CSS to a file, but
                     // in development "style" loader enables hot editing of CSS.
                     {
+                        test: /\.scss$/,
+                        exclude: /node_modules/,
+                        loaders: [{ loader: 'style-loader' },
+                        { loader: 'css-loader' },
+                        {
+                          loader: 'postcss-loader',
+                          options: {
+                            postcss: [
+                              precss(),
+                              autoprefixer({
+                                browsers: ['last 2 versions', 'iOS 7', 'ios 6', '> 5%', 'IE <= 9', 'safari <= 7', 'opera <= 20', 'android 4'],
+                              }),
+                              mqpacker(),
+                            ],
+                          },
+                        },
+                        { loader: 'sass-loader' }
+                        ],
+                      },
+                      {
                         test: /\.css$/,
-                        use: [{
-                                loader: require.resolve('style-loader'),
-                            },
-                            {
-                                loader: require.resolve('css-loader'),
-                                options: {
-                                    importLoaders: 1,
-                                }
-                            },
-                            {
-                              loader: require.resolve('sass-loader'),
-                            },
-                            {
-                                loader: require.resolve('postcss-loader'),
-                                options: {
-                                    ident: 'postcss',
-                                    plugins: () => [
-                                        require('postcss-flexbugs-fixes'),
-                                        autoprefixer({
-                                            browsers: [
-                                                '>1%',
-                                                'last 4 versions',
-                                                'Firefox ESR',
-                                                'not ie < 9',
-                                            ],
-                                            flexbox: 'no-2009',
-                                        }),
-                                    ],
-                                },
-                            },
-                        ]
+                        loaders: [{ loader: 'style-loader' },
+                        { loader: 'css-loader' },
+                        {
+                          loader: 'postcss-loader',
+                          options: {
+                            postcss: [
+                              precss(),
+                              autoprefixer({
+                                browsers: ['last 2 versions', 'iOS 7', 'ios 6', '> 5%', 'IE <= 9', 'safari <= 7', 'opera <= 20', 'android 4'],
+                              }),
+                              mqpacker(),
+                            ],
+                          },
+                        },
+                        { loader: 'sass-loader' }
+                        ],
                     },
                     {
-                        test: /\.scss$/,
-                        use: [{
-                                loader: require.resolve('style-loader'),
-                            },
-                            {
-                                loader: require.resolve('css-loader'),
-                                options: {
-                                    importLoaders: 1,
-                                }
-                            },
-                            {
-                                loader: require.resolve('postcss-loader'),
-                                options: {
-                                    ident: 'postcss',
-                                    plugins: () => [
-                                        require('postcss-flexbugs-fixes'),
-                                        autoprefixer({
-                                            browsers: [
-                                                '>1%',
-                                                'last 4 versions',
-                                                'Firefox ESR',
-                                                'not ie < 9',
-                                            ],
-                                            flexbox: 'no-2009',
-                                        }),
-                                    ],
-                                },
-                            },
-                        ]
-                    },
+                        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+                        loader: 'url-loader?name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff'
+                      },
+                      {
+                        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff'
+                      },
+                      {
+                        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?name=fonts/[name].[ext]&limit=10000&mimetype=application/octet-stream'
+                      },
+                      {
+                        test: /\.otf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?name=fonts/[name].[ext]&limit=10000&mimetype=application/octet-stream'
+                      },
+                      {
+                        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?name=fonts/[name].[ext]'
+                      },
+                      {
+                        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url-loader?name=images/[name].[ext]&limit=10000&mimetype=image/svg+xml'
+                      },
+                      {
+                        test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?name=images/[name].[ext]&limit=10240'
+                      },
                     // "file" loader makes sure those assets get served by WebpackDevServer.
                     // When you `import` an asset, you get its (virtual) filename.
                     // In production, they would get copied to the `build` folder.
@@ -240,6 +216,11 @@ module.exports = {
         ],
     },
     plugins: [
+        webpackIsomorphicToolsPlugin.development(),
+        new ExtractTextPlugin({
+            filename: 'css/[name].css',
+            allChunks: true
+          }),
         // Makes some environment variables available in index.html.
         // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">

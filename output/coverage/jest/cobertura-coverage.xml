@@ -1,0 +1,126 @@
+<?xml version="1.0" ?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage lines-valid="14" lines-covered="0" line-rate="0" branches-valid="25" branches-covered="0" branch-rate="0" timestamp="1537139711951" complexity="0" version="0.1">
+  <sources>
+    <source>/Users/mohamedhamed/workspace/react-redux-saga</source>
+  </sources>
+  <packages>
+    <class name="App.js" filename="src/App.js" line-rate="0" branch-rate="1">
+      <methods>
+        <method name="(anonymous_0)" hits="0" signature="()V">
+          <lines>
+            <line number="5" hits="0"/>
+          </lines>
+        </method>
+      </methods>
+      <lines>
+        <line number="6" hits="0" branch="false"/>
+      </lines>
+    </class>
+    <class name="index.js" filename="src/index.js" line-rate="0" branch-rate="0">
+      <methods>
+        <method name="_interopRequireDefault" hits="0" signature="()V">
+          <lines>
+            <line number="5" hits="0"/>
+          </lines>
+        </method>
+      </methods>
+      <lines>
+        <line number="1" hits="0" branch="false"/>
+        <line number="2" hits="0" branch="false"/>
+        <line number="3" hits="0" branch="false"/>
+        <line number="4" hits="0" branch="false"/>
+        <line number="5" hits="0" branch="true" condition-coverage="0% (0/4)"/>
+        <line number="7" hits="0" branch="false"/>
+        <line number="8" hits="0" branch="false"/>
+      </lines>
+    </class>
+    <class name="registerServiceWorker.js" filename="src/registerServiceWorker.js" line-rate="0" branch-rate="0">
+      <methods>
+        <method name="register" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="(anonymous_1)" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="(anonymous_2)" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="registerValidSW" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="(anonymous_4)" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="(anonymous_5)" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="(anonymous_6)" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="(anonymous_7)" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="checkValidServiceWorker" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="(anonymous_9)" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="(anonymous_10)" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="(anonymous_11)" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="(anonymous_12)" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="unregister" hits="0" signature="()V">
+          <lines>
+            <line number="111" hits="0"/>
+          </lines>
+        </method>
+        <method name="(anonymous_14)" hits="0" signature="()V">
+          <lines>
+            <line number="113" hits="0"/>
+          </lines>
+        </method>
+      </methods>
+      <lines>
+        <line number="1" hits="0" branch="false"/>
+        <line number="21" hits="0" branch="false"/>
+        <line number="111" hits="0" branch="true" condition-coverage="0% (0/19)"/>
+        <line number="112" hits="0" branch="true" condition-coverage="0% (0/2)"/>
+        <line number="113" hits="0" branch="false"/>
+        <line number="114" hits="0" branch="false"/>
+      </lines>
+    </class>
+  </packages>
+</coverage>
