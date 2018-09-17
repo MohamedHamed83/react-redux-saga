@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { shallow, configure, mount, render } from 'enzyme'
+import { shallow, configure } from 'enzyme'
 import renderer from 'react-test-renderer'
 import Button from './button'
 import Adapter from 'enzyme-adapter-react-16';
@@ -18,7 +18,9 @@ describe('button component', () => {
         expect(wrapper.find('div')).toHaveLength(1)
     })
     it('should render a text', () => { 
-        // expect(wrapper.find('title').contains('Submit')).toBe(true)
+        const tree= shallow(wrapper)
+        expect(tree.toJSON()).toMatchSnapshot()
+
     })
     describe('no type', () => { 
         it('should have the default style')
