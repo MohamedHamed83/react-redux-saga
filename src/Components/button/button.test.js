@@ -9,29 +9,24 @@ configure({ adapter: new Adapter() });
 
 const wrapper = shallow(<Button title="Submit" />)
 
-describe('button component', () => { 
-    it('should render the button', () => { 
-       const tree= renderer.create(<Button />)
+describe('button component', () => {
+    it('should render the button', () => {
+        const tree = renderer.create(<Button />)
         expect(tree.toJSON()).toMatchSnapshot()
     })
-    it('should be div', () => { 
+    it('should be div', () => {
         expect(wrapper.find('div')).toHaveLength(1)
     })
-    it('should render a text', () => { 
-        const tree= shallow(wrapper)
-        expect(tree.toJSON()).toMatchSnapshot()
-
-    })
-    describe('no type', () => { 
+    describe('no type', () => {
         it('should have the default style')
     })
-    describe('primary type', () => { 
+    describe('primary type', () => {
         it('should have they primary style')
     })
 })
 
-describe('interactions', () => { 
-    describe('clicking the button', () => { 
+describe('interactions', () => {
+    describe('clicking the button', () => {
         it('should call the onclick callback')
     })
 })

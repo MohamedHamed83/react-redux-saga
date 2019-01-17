@@ -1,0 +1,17 @@
+{
+  "javascript": {
+    "main": "/static/js/bundle.js"
+  },
+  "styles": {},
+  "assets": {
+    "./src/App.scss": {
+      "_style": ".App {\n  text-align: center; }\n\n.App-logo {\n  animation: App-logo-spin infinite 20s linear;\n  height: 80px; }\n\n.App-header {\n  background-color: #222;\n  height: 150px;\n  padding: 20px;\n  color: white; }\n\n.App-title {\n  font-size: 1.5em; }\n\n.App-intro {\n  font-size: large; }\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg); }\n  to {\n    transform: rotate(360deg); } }\n"
+    },
+    "./src/index.scss": {
+      "_style": "body {\n  margin: 0;\n  padding: 0;\n  font-family: sans-serif; }\n"
+    }
+  },
+  "webpack": {
+    "version": "3.8.1"
+  }
+}

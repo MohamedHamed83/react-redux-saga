@@ -10,7 +10,7 @@ exports[`app should render the app 1`] = `
     <h1
       className="App-title"
     >
-         
+       Welcome to Datacom react starter app   
     </h1>
   </header>
   <p
